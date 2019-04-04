@@ -5,9 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fasttrackit.Domain.Product;
 import org.fasttrackit.Persistence.ProductRepository;
 import org.fasttrackit.Transfer.CreateProductRequest;
+import org.fasttrackit.Transfer.UpdateProductRequest;
 import org.fasttrackit.onlineshopapi.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -41,4 +43,16 @@ public class ProductService {
                 .orElseThrow(()->new ResourceNotFoundException("Resource "+id+" not found"));
     }
 
+    public Product updateProduct(long id, UpdateProductRequest request) throws ResourceNotFoundException {
+        LOGGER.info("Updating product {} {}",id,request);
+        Product product=getProduct(id);
+        BeanUtils.copyProperties(request,product);
+        return productRepository.save(product);
+    }
+
+    public void deleteProduct(long id){
+        LOGGER.info("Deleting product {}",id);
+        productRepository.deleteById(id);
+        LOGGER.info("Deleted product {}",id);
+    }
 }

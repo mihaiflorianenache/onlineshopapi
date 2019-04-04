@@ -3,6 +3,7 @@ package org.fasttrackit;
 import org.fasttrackit.Domain.Product;
 import org.fasttrackit.Service.ProductService;
 import org.fasttrackit.Transfer.CreateProductRequest;
+import org.fasttrackit.Transfer.UpdateProductRequest;
 import org.fasttrackit.onlineshopapi.exception.ResourceNotFoundException;
 import org.junit.Test;
 
@@ -18,9 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 
 @RunWith(SpringRunner.class)
@@ -68,6 +67,35 @@ public class ProductServiceIntegrationTests {
 
         assertThat(retrievedProduct.getId(), is(product.getName()));
         assertThat(retrievedProduct.getName(),is(product.getName()));
+    }
+
+    @Test
+    public void testGetProduct_whenValidRequestWithAllFields_thenReturnUpdatedProduct() throws ResourceNotFoundException {
+        Product createdProduct=createProduct();
+
+        UpdateProductRequest request=new UpdateProductRequest();
+        request.setName(createdProduct.getName()+"+Edited");
+        request.setPrice(createdProduct.getPrice()+10);
+        request.setQuantity(createdProduct.getQuantity()+10);
+        request.setSku(createdProduct.getSku()+"_Edited");
+
+        Product updatedProduct=productService.updateProduct(createdProduct.getId(),request);
+
+        assertThat(updatedProduct.getName(),is(request.getName()));
+        assertThat(updatedProduct.getName(),not(is(createdProduct.getName())));
+
+        assertThat(updatedProduct.getPrice(),is(request.getPrice()));
+        assertThat(updatedProduct.getQuantity(),is(request.getQuantity()));
+        assertThat(updatedProduct.getSku(),is(request.getSku()));
+    }
+
+    //todo:Implement negativ test for update and tests for update with some fields only
+
+    @Test
+    public void testDeleteProduct_whenExistingId_thenProductIsDeleted() throws ResourceNotFoundException {
+        Product createdProduct=createProduct();
+        productService.deleteProduct(createdProduct.getId());
+        productService.getProduct(createdProduct.getId());
     }
 }
 
