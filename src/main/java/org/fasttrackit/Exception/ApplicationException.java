@@ -1,6 +1,7 @@
-package org.fasttrackit.onlineshopapi.exception;
+package org.fasttrackit.Exception;
 
 public abstract class ApplicationException extends Exception {
+
     private String code;
 
     public ApplicationException(String message, String code) {
@@ -8,12 +9,12 @@ public abstract class ApplicationException extends Exception {
         this.code = code;
     }
 
-    public String getCode(){
+    public String getCode() {
         return code;
     }
 
-    public void setCode(String code){
-        this.code=code;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override

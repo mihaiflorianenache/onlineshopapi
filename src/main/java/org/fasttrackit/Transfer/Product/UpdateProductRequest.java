@@ -1,10 +1,18 @@
-package org.fasttrackit.Transfer;
+package org.fasttrackit.Transfer.Product;
+
+import javax.validation.constraints.NotBlank;
+
+
 
 public class UpdateProductRequest {
 
 
 
+    @NotBlank
+
     private String name;
+
+    @NotBlank
 
     private String sku;
 

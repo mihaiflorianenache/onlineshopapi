@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 
-public class OnlineShopApiApplicationTest {
+public class OnlineShopApplicationTest {
 
 
 
