@@ -75,7 +75,7 @@ public class ProductServiceIntegrationTests {
 
 
 
-        return productService.createProduct(request);
+        return productService.productSteps.createProduct();
 
     }
 
