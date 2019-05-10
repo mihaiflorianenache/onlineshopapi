@@ -83,4 +83,6 @@ public class ProductService {
         productRepository.deleteById(id);
         LOGGER.info("Deleted product {}", id);
     }
+
+
 }

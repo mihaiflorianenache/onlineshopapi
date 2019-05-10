@@ -2,11 +2,14 @@ package org.fasttrackit;
 
 import org.fasttrackit.Domain.Product;
 import org.fasttrackit.Exception.ResourceNotFoundException;
+import org.fasttrackit.Service.CartService;
 import org.fasttrackit.Service.ProductService;
 import org.fasttrackit.Transfer.Product.CreateProductRequest;
 import org.fasttrackit.Transfer.Product.GetProductsRequest;
 import org.fasttrackit.Transfer.Product.UpdateProductRequest;
 
+import org.fasttrackit.steps.CustomerSteps;
+import org.fasttrackit.steps.ProductSteps;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
@@ -37,12 +40,17 @@ import static org.hamcrest.Matchers.*;
 
 public class ProductServiceIntegrationTests {
 
-
-
     @Autowired
-
     private ProductService productService;
 
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private ProductSteps productSteps;
+
+    @Autowired
+    private CustomerSteps customerSteps;
 
 
     @Test
@@ -75,7 +83,7 @@ public class ProductServiceIntegrationTests {
 
 
 
-        return productService.productSteps.createProduct();
+        return productSteps.createProduct();
 
     }
 

@@ -2,6 +2,7 @@ package org.fasttrackit.steps;
 
 import org.fasttrackit.Domain.Customer;
 import org.fasttrackit.Service.CustomerService;
+import org.fasttrackit.Transfer.Customer.CreateCustomerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ public class CustomerSteps {
     private CustomerService customerService;
 
     public Customer createCustomer(){
-        Customer customer=new Customer();
+        CreateCustomerRequest customer=new CreateCustomerRequest();
         customer.setFirstName("John");
         customer.setLastName("Doe");
         customer.setAddress("test address");
